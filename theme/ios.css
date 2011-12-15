@@ -1,1 +1,6 @@
 @CHARSET "UTF-8";
+
+/* ensure that selection and copy from dom is disabled */
+* {
+  -webkit-user-select: none;
+}
