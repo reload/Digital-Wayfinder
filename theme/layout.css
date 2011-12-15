@@ -1,1 +1,11 @@
 @CHARSET "UTF-8";
+
+html,body {
+  height: 100%;
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+  color: #fff;
+}
