@@ -12,6 +12,29 @@ body {
   color: #fff;
 }
 
+.overlay {
+  position:absolute;
+  z-index:9;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background: rgba(0,0,0,0.8);
+  display: -webkit-box;
+-webkit-box-pack:center;
+-webkit-box-align:center;
+-webkit-box-orient:vertical;
+
+text-align:center;
+font-size:1.2em;
+}
+.overlay img{
+  position:absolute;
+  bottom:1em;
+  right:1em;
+  width:2em;
+}
+
 .red-gradient {
   background-image: -webkit-linear-gradient(top, rgb(192,32,38) 0%, rgb(112,14,17) 100%);
 }

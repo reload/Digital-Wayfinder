@@ -1,5 +1,11 @@
 jQuery(function(){
 
+  if (!window.navigator.standalone) {
+    // prevent application to be run as a webpage
+    $('body').prepend('<div class="overlay"><h1 class="webapp">Please add to homescreen<br>inorder to use<br>this app</h1><br><a href="http://reload.dk"><img src="theme/reload.svg"></a></div>');
+    return false;
+  }
+
 
   // build floors list
   $(data).each(function(i){
