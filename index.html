@@ -1,13 +1,14 @@
 <!doctype html>
-<html>
+<html manifest="digitalwayfinder.appcache">
   <head>
     <meta charset="utf-8">
     <!-- Following meta tags are iOS specfic to make the website act more like an application -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=2.3, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="apple-touch-icon-precomposed" href="theme/icon.png"/>
+
 
     <script src="theme/data.js"></script>
     <script src="theme/jquery.js"></script>
@@ -20,8 +21,13 @@
   </head>
   <body>
 
+  <div class="topbar red-gradient">Topbar</div>
+
+  <img class="floorplan-image">
+  <img class="element-image">
+
+
   <ul class="keywords"></ul>
 
-  <ul class="plans"></ul>
+  <ul class="floornav"></ul>
 
-  <ul class="images"></ul>
