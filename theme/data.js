@@ -8,41 +8,211 @@ var data = [
     'name' : 'Stuen',
     'filename' : 'p0.svg',
     'keywords' : [
-                  {
-                    'name' : 'Café',
-                    'id' : 0,
-                    'filename' : 'p0e1.svg'
-                  },
-                  {
-                    'name' : 'Receptionen',
-                    'id' : 1,
-                    'filename' : 'p0e2.svg'
-                  },
-                  {
-                    'name' : 'Borgerservice',
-                    'id' : 2,
-                    'filename' : 'p0e3.svg'
-                  },
-                  {
-                    'name' : 'Salonen',
-                    'id' : 3,
-                    'filename' : 'p0e4.svg'
-                  },
-                  {
-                    'name' : 'Intimscene',
-                    'id' : 4,
-                    'filename' : 'p0e5.svg'
-                  },
-                  {
-                    'name' : 'Toiletter',
-                    'id' : 5,
-                    'filename' : 'p0e6.svg'
-                  },
-                  {
-                    'name' : 'Elevator',
-                    'id' : 6,
-                    'filename' : 'p0e7.svg'
-                  },
+{
+  'name' : 'Café',
+  'id' : 0,
+  'filename' : 'p0e1.svg'
+},
+{
+  'name' : 'Receptionen',
+  'id' : 1,
+  'filename' : 'p0e2.svg'
+},
+{
+  'name' : 'Borgerservice',
+  'id' : 2,
+  'filename' : 'p0e3.svg'
+},
+{
+  'name' : 'Salonen',
+  'id' : 3,
+  'filename' : 'p0e4.svg'
+},
+{
+  'name' : 'Intimscene',
+  'id' : 4,
+  'filename' : 'p0e5.svg'
+},
+{
+  'name' : 'Toiletter',
+  'id' : 5,
+  'filename' : 'p0e6.svg'
+},
+{
+  'name' : 'Elevator',
+  'id' : 6,
+  'filename' : 'p0e7.svg'
+},{
+  'name' : 'Café',
+  'id' : 0,
+  'filename' : 'p0e1.svg'
+},
+{
+  'name' : 'Receptionen',
+  'id' : 1,
+  'filename' : 'p0e2.svg'
+},
+{
+  'name' : 'Borgerservice',
+  'id' : 2,
+  'filename' : 'p0e3.svg'
+},
+{
+  'name' : 'Salonen',
+  'id' : 3,
+  'filename' : 'p0e4.svg'
+},
+{
+  'name' : 'Intimscene',
+  'id' : 4,
+  'filename' : 'p0e5.svg'
+},
+{
+  'name' : 'Toiletter',
+  'id' : 5,
+  'filename' : 'p0e6.svg'
+},
+{
+  'name' : 'Elevator',
+  'id' : 6,
+  'filename' : 'p0e7.svg'
+},{
+  'name' : 'Café',
+  'id' : 0,
+  'filename' : 'p0e1.svg'
+},
+{
+  'name' : 'Receptionen',
+  'id' : 1,
+  'filename' : 'p0e2.svg'
+},
+{
+  'name' : 'Borgerservice',
+  'id' : 2,
+  'filename' : 'p0e3.svg'
+},
+{
+  'name' : 'Salonen',
+  'id' : 3,
+  'filename' : 'p0e4.svg'
+},
+{
+  'name' : 'Intimscene',
+  'id' : 4,
+  'filename' : 'p0e5.svg'
+},
+{
+  'name' : 'Toiletter',
+  'id' : 5,
+  'filename' : 'p0e6.svg'
+},
+{
+  'name' : 'Elevator',
+  'id' : 6,
+  'filename' : 'p0e7.svg'
+},{
+  'name' : 'Café',
+  'id' : 0,
+  'filename' : 'p0e1.svg'
+},
+{
+  'name' : 'Receptionen',
+  'id' : 1,
+  'filename' : 'p0e2.svg'
+},
+{
+  'name' : 'Borgerservice',
+  'id' : 2,
+  'filename' : 'p0e3.svg'
+},
+{
+  'name' : 'Salonen',
+  'id' : 3,
+  'filename' : 'p0e4.svg'
+},
+{
+  'name' : 'Intimscene',
+  'id' : 4,
+  'filename' : 'p0e5.svg'
+},
+{
+  'name' : 'Toiletter',
+  'id' : 5,
+  'filename' : 'p0e6.svg'
+},
+{
+  'name' : 'Elevator',
+  'id' : 6,
+  'filename' : 'p0e7.svg'
+},{
+  'name' : 'Café',
+  'id' : 0,
+  'filename' : 'p0e1.svg'
+},
+{
+  'name' : 'Receptionen',
+  'id' : 1,
+  'filename' : 'p0e2.svg'
+},
+{
+  'name' : 'Borgerservice',
+  'id' : 2,
+  'filename' : 'p0e3.svg'
+},
+{
+  'name' : 'Salonen',
+  'id' : 3,
+  'filename' : 'p0e4.svg'
+},
+{
+  'name' : 'Intimscene',
+  'id' : 4,
+  'filename' : 'p0e5.svg'
+},
+{
+  'name' : 'Toiletter',
+  'id' : 5,
+  'filename' : 'p0e6.svg'
+},
+{
+  'name' : 'Elevator',
+  'id' : 6,
+  'filename' : 'p0e7.svg'
+},{
+  'name' : 'Café',
+  'id' : 0,
+  'filename' : 'p0e1.svg'
+},
+{
+  'name' : 'Receptionen',
+  'id' : 1,
+  'filename' : 'p0e2.svg'
+},
+{
+  'name' : 'Borgerservice',
+  'id' : 2,
+  'filename' : 'p0e3.svg'
+},
+{
+  'name' : 'Salonen',
+  'id' : 3,
+  'filename' : 'p0e4.svg'
+},
+{
+  'name' : 'Intimscene',
+  'id' : 4,
+  'filename' : 'p0e5.svg'
+},
+{
+  'name' : 'Toiletter',
+  'id' : 5,
+  'filename' : 'p0e6.svg'
+},
+{
+  'name' : 'Elevator',
+  'id' : 6,
+  'filename' : 'p0e7.svg'
+},
 ]
   },
   {
