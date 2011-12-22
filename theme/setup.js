@@ -16,6 +16,8 @@ jQuery(function(){
   // change overlay
   $('.keywords li ul li').click(function(){
     var clickedElementIndex = $('.keywords li ul li').index(this);
+    $(this).siblings().removeClass('act');
+    $(this).addClass('act');
     var indexa = 0;
     var found = false;
     $(data).each(function(fi){
