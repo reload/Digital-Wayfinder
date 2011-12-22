@@ -22,11 +22,77 @@ body {
   z-index:2;
 }
 
-.keywords {
+
+.keywords, .keywords ul{
+  list-style: none;
+  padding:0;
+}
+.keywords > li{
   position: absolute;
+
+  top:5em;
+  left:1em;
+  width:30%;
+  height:80%;
+}
+
+
+.keywords > li:before {
+  content : '.';
+  position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:3em;
+        z-index:11;
+        text-indent:-999em;
+        background-image: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)
+}
+.keywords > li:after {
+  content : '.';
+  position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height:3em;
+        z-index:11;
+        text-indent:-999em;
+             background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)
+}
+
+.keywords li ul {
+position: absolute;
   z-index:2;
-  width:20%;
-  height:70%;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  font-size:1.5em;
+   -webkit-overflow-scrolling: touch;
+        overflow-y:scroll;
+}
+
+.keywords li ul li:first-child {
+  padding-top:3em;
+}
+.keywords li ul li:last-child {
+  padding-bottom:3em;
+}
+.keywords li ul li {
+  padding: 0.2em 0;
+}
+.keywords li ul li:before{
+  content: ".";
+  border:0.1em solid #fff;
+  height:0.7em;
+  width:0.7em;
+  display:inline-block;
+  text-indent:-999em;
+  border-radius:50%;
+  margin-right:0.3em;
+}
+.keywords li ul li.act:before{
+  background: rgb(192,32,38);
 }
 
 .floorplan-image {
