@@ -28,6 +28,12 @@ body {
 text-align:center;
 font-size:1.2em;
 }
+.inp {
+  z-index:400;
+  top:10%;
+  left:10%;
+  position: absolute;
+}
 .overlay img{
   position:absolute;
   bottom:1em;
@@ -44,7 +50,20 @@ font-size:1.2em;
   padding: 1em;
   z-index:2;
 }
+.topbar span {
+  float:right;
+}
+.topbar span:before {
+  content : " ";
+  background: url('kk.svg');
 
+  background-size: cover;
+  width:2em;
+  height:4em;
+  border: 1px solid blue;
+  display:block;
+  float:left;
+}
 
 .keywords, .keywords ul{
   list-style: none;
