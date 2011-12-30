@@ -126,6 +126,15 @@ position: absolute;
   background: rgb(192,32,38);
 }
 
+.keywords li ul li div {
+  text-align: right;
+  color:#666;
+  font-size:0.8em;
+}
+.keywords li ul li div span{
+  margin-left:1em;
+}
+
 .floorplan-image {
   position:absolute;
   top:0;
