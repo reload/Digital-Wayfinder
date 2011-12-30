@@ -4,26 +4,28 @@ jQuery(function(){
   webApp = window.navigator.standalone;
   isAdminApp = window.location.hash.substring(1) == 'admin';
 
+  var countdown = 0;
+  var initialCountdown = 15;
+  var activeFloor = 0;
+  var initialFloor = 0;
 
-
+  // get floor from storage
   if(localStorage.getItem("floor")){
-    var initialFloor = localStorage.getItem("floor");
+    initialFloor = localStorage.getItem("floor");
   }
   else{
     initialFloor = 0;
   }
-  var countdown = 5;
-
 
   if(isAdminApp) {
     $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
     $('body').prepend('<input class="inp" placeholder="Indtast dit navn" type="text" name="handle">');
-    $('.inp').keydown(function(e){
+    /*$('.inp').keydown(function(e){
       console.log(e.keyCode);
       if(e.keyCode == 13) {
         localStorage.setItem("floor", $('.inp').val());
       }
-    });
+    });*/
   }
 
   if (isiPad && !webApp) {
@@ -43,10 +45,11 @@ jQuery(function(){
     $('.floornav').append('<li>'+this.name+'</li>');
     $('.keywords').append('<li><ul></ul></li>');
 
-    $(this.keywords).each(function(i){
-      $('.keywords li:last-child ul').append('<li data-id="'+this.id+'">'+this.name+'</li>');
-    });
-
+    if (!isAdminApp) {
+      $(this.keywords).each(function(i){
+        $('.keywords li:last-child ul').append('<li data-id="'+this.id+'">'+this.name+'</li>');
+      });
+    }
   });
 
   // change overlay
@@ -74,11 +77,9 @@ jQuery(function(){
   });
 
   $('.floornav li').click(function(){
-    var clickedFloorIndex = $('.floornav li').index(this);
+    activeFloor = $('.floornav li').index(this);
 
-
-    changeFloorPlan(clickedFloorIndex);
-
+    changeFloorPlan(activeFloor);
   });
 
   function changeFloorPlan(index){
@@ -126,7 +127,7 @@ jQuery(function(){
     }
 
     $('body').click(function(){
-      countdown = 5;
+      countdown = initialCountdown;
     });
     function startCountdown(){
       setInterval(function(){
