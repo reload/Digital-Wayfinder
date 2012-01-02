@@ -91,7 +91,7 @@ font-size:1.2em;
              background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)
 }
 
-.keywords li ul {
+.keywords > li > ul {
 position: absolute;
   z-index:2;
   top:0;
@@ -103,16 +103,16 @@ position: absolute;
         overflow-y:scroll;
 }
 
-.keywords li ul li:first-child {
+.keywords > li > ul > li:first-child {
   padding-top:3em;
 }
-.keywords li ul li:last-child {
+.keywords > li > ul > li:last-child {
   padding-bottom:3em;
 }
-.keywords li ul li {
+.keywords > li > ul > li {
   padding: 0.2em 0;
 }
-.keywords li ul li:before{
+.keywords > li > ul > li:before{
   content: ".";
   border:0.1em solid #fff;
   height:0.7em;
@@ -122,11 +122,11 @@ position: absolute;
   border-radius:50%;
   margin-right:0.3em;
 }
-.keywords li ul li.act:before{
+.keywords > li > ul > li.act:before{
   background: rgb(192,32,38);
 }
 
-.keywords li ul li div {
+.keywords > li > ul > li > ul {
   text-align: right;
   color:#666;
   font-size:0.8em;
@@ -150,8 +150,17 @@ position: absolute;
   width:100%;
   z-index:1;
 }
-.keywords li ul {
+.keywords > li > ul,
+.keywords .floor-list {
   display: none;
+}
+
+.keywords .act .floor-list {
+  display: block;
+}
+.keywords .floor-list li {
+  display: inline-block;
+  margin-left:0.5em;
 }
 
 /*

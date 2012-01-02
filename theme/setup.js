@@ -1,5 +1,8 @@
-d = function(msg){
+d = function(msg,name){
 
+  if(name !== undefined){
+    console.log(name+': '+msg);
+  }
   console.log(msg);
 }
 
@@ -9,8 +12,7 @@ jQuery(function(){
   webApp = window.navigator.standalone;
   isAdminApp = window.location.hash.substring(1) == 'admin';
 
-  var countdown = 0;
-  //var initialCountdown = 15;
+
   var activeFloor = 0;
   var activeKeyword = 0;
   var initialFloor = 0;
@@ -43,32 +45,43 @@ jQuery(function(){
 
 
   // build floors list
-  $(data).each(function(i){
+  $(data).each(function(fi){
 
     $('.floornav').append('<li>'+this.name+'</li>');
     $('.keywords').append('<li><ul></ul></li>');
 
+
+
     if (!isAdminApp) {
       $(this.keywords).each(function(i){
-        $('.keywords li:last-child ul').append('<li data-id="'+this.id+'">'+this.name+'</li>');
+        $('.keywords li:last-child ul:not(.floor-list)').append('<li data-id="'+this.id+'">'+this.name+'</li>');
         var dataid = this.id;
         // this element also exists on other floors
-/*        console.log(dataid);
-
-        $(data)*/
+        $(data).each(function(floorId){
+          $(this.keywords).each(function(elementId){
+            if(floorId == fi){
+              return;
+            }
+            if(dataid == this.id) {
+              if($('.keywords > li:last-child > ul > li:last-child > ul')[0] == undefined){
+                d('not');
+                $('.keywords > li:last-child > ul > li:last-child').append('<ul class="floor-list"></ul>');
+              }
+              $('.keywords > li:last-child > ul > li:last-child > ul.floor-list').append('<li>'+data[floorId].name+'</li>');
+              $('.keywords > li:last-child > ul > li:last-child > ul.floor-list > li:last-child').click(function(){
+                changeFloorPlan(floorId,false);
+              });
+            }
+          });
+        });
 
       });
     }
   });
 
   // change overlay
-  $('.keywords li ul li').click(function(){
-    activeKeyword = $('.keywords li ul li').index(this);
-
-
-
-    //$(this).siblings().removeClass('act');
-    //$(this).addClass('act');
+  $('.keywords > li > ul > li').click(function(){
+    activeKeyword = $('.keywords > li > ul > li').index(this);
 
     itemClicked = $(this);
 
@@ -82,7 +95,7 @@ jQuery(function(){
           found = true;
           if(found){
             changeOverlay(fi,ei);
-            activeDataId = $('.keywords li ul:eq('+fi+') li:eq('+ei+')').attr('data-id');
+            activeDataId = $('.keywords > li > ul:eq('+fi+') > li:eq('+ei+')').attr('data-id');
             return false;
           }
         }
@@ -105,11 +118,11 @@ jQuery(function(){
   });
 
   function changeFloorPlan(index,reset){
-    $('.keywords li ul').fadeOut('fast');
+    $('.keywords > li > ul').fadeOut('fast');
     $('.floorplan-image').animate({
       'opacity': 0
     },'fast',function(){
-      // if layer contains same id, select that id
+      // if target layer contains same id, select that id
       elementid = null;
       if(!reset) {
        $(data[index].keywords).each(function(i){
@@ -123,7 +136,7 @@ jQuery(function(){
         activeDataId = 0;
       }
       changeOverlay(index,elementid);
-      $('.keywords li ul:eq('+index+')').fadeIn('fast');
+      $('.keywords > li > ul:eq('+index+')').fadeIn('fast');
       $('.floorplan-image').attr('src', 'files/' + data[index].filename);
       $('.floorplan-image').animate({
         'opacity': 1
@@ -138,43 +151,13 @@ jQuery(function(){
 
   function changeOverlay(floorIndex,elementIndex) {
 
-    $('.keywords li ul li div').remove();
-
-    $(data).each(function(i){
-
-      var floor = this;
-      floor.id = i;
-
-      if(i != activeFloor){
-       $(this.keywords).each(function(){
-         //d(itemClicked);
-         if(this.id == clickedId){
-           if($('div',itemClicked)[0] == undefined){
-             $(itemClicked).append('<div></div>');
-           }
-           $('div',itemClicked).append('<span>' + floor.name+'</span>');
-           $('div > span:last-child',itemClicked).click(function(){
-             d($(this).html());
-             d(floor);
-             changeFloorPlan(floor.id ,false);
-           });
-
-          }
-
-
-       });
-      }
-    })
-
-
-
-    $('.keywords li ul li').removeClass('act');
+    $('.keywords > li > ul > li').removeAttr('class');
     if(elementIndex == null) {
       $('.element-image').hide();
     }
     else{
       $('.element-image').show();
-      $('.keywords li ul:eq('+floorIndex+') li:eq('+elementIndex+')').addClass('act');
+      $('.keywords > li > ul:eq('+floorIndex+') > li:eq('+elementIndex+')').addClass('act');
       $('.element-image').attr('src', 'files/' + data[floorIndex].keywords[elementIndex].filename);
     }
   }
@@ -206,7 +189,7 @@ jQuery(function(){
 appReset = {
   'callback' : function(){ },
   'countdown' : 0,
-  'initialCountdown' : 5,
+  'initialCountdown' : 15,
   'init' : function(callback){
     this.callback = callback;
     this.start();
