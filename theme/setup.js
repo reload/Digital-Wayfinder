@@ -10,7 +10,7 @@ jQuery(function(){
   isAdminApp = window.location.hash.substring(1) == 'admin';
 
   var countdown = 0;
-  var initialCountdown = 15;
+  //var initialCountdown = 15;
   var activeFloor = 0;
   var activeKeyword = 0;
   var initialFloor = 0;
@@ -30,16 +30,6 @@ jQuery(function(){
     initialFloor = 0;
   }
 
-  if(isAdminApp) {
-    $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
-    //$('body').prepend('<input class="inp" placeholder="Indtast dit navn" type="text" name="handle">');
-    /*$('.inp').keydown(function(e){
-      console.log(e.keyCode);
-      if(e.keyCode == 13) {
-        localStorage.setItem("floor", $('.inp').val());
-      }
-    });*/
-  }
 
   if (isiPad && !webApp) {
     // prevent application to be run as a webpage
@@ -202,25 +192,41 @@ jQuery(function(){
   landscapeOrient();
 
 
-  // when the document is clicked terminate countdown to reset
 
-  if (!isAdminApp){
-    startCountdown();
-    function resetApp() {
-      changeFloorPlan(initialFloor,true);
-      console.log('app resetting!');
-    }
-
-    $('body').click(function(){
-      countdown = initialCountdown;
-    });
-    function startCountdown(){
-      setInterval(function(){
-        countdown--;
-        if(countdown == 0) {
-          resetApp();
-        }
-      },1000);
-    }
+  if(isAdminApp){
+    // show a diffrent app icon
+    $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
+  }
+  else{
+    // when the document is clicked terminate countdown to reset
+    appReset.init(function(){changeFloorPlan(initialFloor,true)});
   }
 });
+
+appReset = {
+  'callback' : function(){ },
+  'countdown' : 0,
+  'initialCountdown' : 5,
+  'init' : function(callback){
+    this.callback = callback;
+    this.start();
+    this.handlers();
+  },
+  'start' : function(){
+    setInterval(function(){
+      appReset.countdown--;
+      if(appReset.countdown == 0) {
+        appReset.reset();
+      }
+    },1000);
+  },
+  'handlers' : function(){
+    $('body').click(function(){
+      appReset.countdown = appReset.initialCountdown;
+    });
+  },
+  'reset' : function(){
+    this.callback();
+    d('app resetting!');
+  }
+}
