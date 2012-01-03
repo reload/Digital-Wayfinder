@@ -134,10 +134,11 @@ jQuery(function($){
         var floor = this;
         floor.id = i;
 
+
         if(i != activeFloor){
          $(this.keywords).each(function(){
            if(this.id == clickedId){
-             d(itemClicked);
+             ll.d(itemClicked);
              if($('ul',itemClicked)[0] == undefined){
                $(itemClicked).append('<ul class="floor-list"></ul>');
              }
@@ -222,6 +223,6 @@ appReset = {
   },
   'reset' : function(){
     this.callback();
-    d('app resetting!');
+    ll.d('app resetting!');
   }
 }
