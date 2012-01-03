@@ -15,13 +15,16 @@ jQuery(function(){
 
 
   var activeFloor = 0;
-  var activeKeyword = 0;
+  //var activeKeyword = 0;
   var initialFloor = 0;
-  var activeDataId = 0;
+  //var activeDataId = 0;
 
-  var itemClicked = 0;
+  var global = {};
 
-  var clickedId = 0;
+  //var itemClicked = 0;
+
+  //var clickedId = 0;
+  //var aggregate = false;
 
 
   // get floor from storage
@@ -46,82 +49,46 @@ jQuery(function(){
 
 
   // build floors list
-  $(data).each(function(fi){
+  $(data).each(function(floorid){
 
+    // prepare each floor for keywords and build floor pagination
     $('.floornav').append('<li>'+this.name+'</li>');
-    $('.keywords').append('<li><ul></ul></li>');
-
-
-
-    if (!isAdminApp) {
-      $(this.keywords).each(function(i){
-        $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'">'+this.name+'</li>');
-        $('.keywords > li:last-child > ul > li:last-child').click(function(){
-          changeOverlay(fi,i);
-          activeDataId = $('.keywords > li > ul:eq('+fi+') > li:eq('+i+')').attr('data-id');
-        });
-        /* var dataid = this.id;
-        // this element also exists on other floors
-        $(data).each(function(floorId){
-          $(this.keywords).each(function(elementId){
-            if(floorId == fi){
-              return;
-            }
-            if(dataid == this.id) {
-              if($('.keywords > li:last-child > ul > li:last-child > ul')[0] == undefined){
-                d('not');
-                $('.keywords > li:last-child > ul > li:last-child').append('<ul class="floor-list"></ul>');
-              }
-              $('.keywords > li:last-child > ul > li:last-child > ul.floor-list').append('<li>'+data[floorId].name+'</li>');
-              $('.keywords > li:last-child > ul > li:last-child > ul.floor-list > li:last-child').click(function(){
-                activeFloor = floorId;
-                changeFloorPlan(floorId,false);
-              });
-            }
-          });
-        });*/
-
-      });
-    }
-  });
-
-  // change overlay click events
-  /*$('.keywords > li > ul > li').click(function(){
-    activeKeyword = $('.keywords > li > ul > li').index(this);
-
-    var indexa = 0;
-    var found = false;
-    $(data).each(function(fi){
-      $(this.keywords).each(function(ei){
-        if(indexa == activeKeyword) {
-          found = true;
-          if(found){
-            changeOverlay(fi,ei);
-            activeDataId = $('.keywords > li > ul:eq('+fi+') > li:eq('+ei+')').attr('data-id');
-            return false;
-          }
-        }
-        indexa++;
-      });
-      if(found){
-        return false;
+    $('.floornav > li:last-child').click(function(){
+      changeFloorPlan(floorid,false);
+      if(isAdminApp) {
+        localStorage.setItem("floor", floorid);
       }
     });
-  });*/
-
-  // floorplan click events
-  $('.floornav li').click(function(){
-    activeFloor = $('.floornav li').index(this);
-
-    changeFloorPlan(activeFloor,false);
-
-    if(isAdminApp) {
-      localStorage.setItem("floor", activeFloor);
+    $('.keywords').append('<li><ul></ul></li>');
+    if (!isAdminApp) {
+      $(this.keywords).each(function(i){
+        // Create a list item in the last created Unordered List and bind a clickevent
+        $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'" data-floor-id="'+floorid+'">'+this.name+'</li>');
+        $('.keywords > li:last-child > ul > li:last-child').click(function(){
+          global.activeKeywordId = $(this).attr('data-id');
+          changeOverlay(floorid,i);
+          // Set the active state on keywords
+          $('.keywords > li > ul > li').removeAttr('class');
+          $('.keywords > li > ul > li[data-id="'+global.activeKeywordId+'"]').addClass('act');
+        });
+      });
     }
   });
-  // aggregated list click event
+  // aggregate keyword list
+  $('.keywords').append('<li class="aggregated"><ul></ul></li>');
+  $('.keywords > li > ul > li').clone(true).appendTo($('.keywords > li.aggregated > ul'));
+
   $('.topbar a').click(function(e){
     e.preventDefault();
+    if(global.aggretate == false){
+      global.aggretate = true;
+      changeFloorPlan(activeFloor,false);
+      $(this).addClass('act');
+      return;
+    }
+    global.aggretate = false;
+    changeFloorPlan(activeFloor,false);
+    $(this).removeClass('act');
 
   });
 
@@ -135,7 +102,7 @@ jQuery(function(){
       if(!reset) {
        $(data[index].keywords).each(function(i){
          //console.log(this);
-         if(this.id == activeDataId) {
+         if(this.id == global.activeKeywordId) {
            elementid = i;
          }
        });
@@ -144,7 +111,13 @@ jQuery(function(){
         activeDataId = 0;
       }
       changeOverlay(index,elementid);
-      $('.keywords > li > ul:eq('+index+')').fadeIn('fast');
+      if(!global.aggretate) {
+        $('.keywords > li > ul:eq('+index+')').fadeIn('fast');
+      }
+      else{
+        $('.keywords > li.aggregated > ul').fadeIn('fast');
+      }
+
       $('.floorplan-image').attr('src', 'files/' + data[index].filename);
       $('.floorplan-image').animate({
         'opacity': 1
@@ -192,13 +165,13 @@ jQuery(function(){
 
 
 
-    $('.keywords > li > ul > li').removeAttr('class');
+    //$('.keywords > li > ul > li').removeAttr('class');
     if(elementIndex == null) {
       $('.element-image').hide('fast');
     }
     else{
       $('.element-image').show('fast');
-      $('.keywords > li > ul:eq('+floorIndex+') > li:eq('+elementIndex+')').addClass('act');
+      //$('.keywords > li > ul:eq('+floorIndex+') > li:eq('+elementIndex+')').addClass('act');
       $('.element-image').attr('src', 'files/' + data[floorIndex].keywords[elementIndex].filename);
     }
   }
