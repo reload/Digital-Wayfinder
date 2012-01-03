@@ -74,7 +74,8 @@ jQuery(function($){
   });
   // aggregate keyword list
   $('.keywords').append('<li class="aggregated"><ul></ul></li>');
-  $('.keywords > li > ul > li').clone(true).appendTo($('.keywords > li.aggregated > ul'));
+  $('.keywords > li > ul > li').clone(true).sort(ll.sort).appendTo($('.keywords > li.aggregated > ul'));
+  ll.d($('.keywords > li > ul > li'));
 
   $('.topbar a').click(function(e){
     e.preventDefault();

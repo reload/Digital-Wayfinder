@@ -11,6 +11,8 @@ ll = {
       return;
     }
     console.log(msg);
+  },
+  'sort' : function sortAlpha(a,b){
+    return a.innerHTML.toLowerCase() > b.innerHTML.toLowerCase() ? 1 : -1;
   }
-
 };
