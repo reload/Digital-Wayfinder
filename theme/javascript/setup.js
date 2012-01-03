@@ -56,7 +56,7 @@ jQuery(function($){
     if (!isAdminApp) {
       $(this.keywords).each(function(i){
         // Create a list item in the last created Unordered List and bind a clickevent
-        $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'" data-floor-id="'+floorid+'">'+this.name+' ('+floorid+')</li>');
+        $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'" data-floor-id="'+floorid+'">'+this.name+'</li>');
         $('.keywords > li:last-child > ul > li:last-child').click(function(){
           global.activeKeywordId = $(this).attr('data-id');
           if(floorid != global.activeFloor) {
