@@ -94,7 +94,7 @@ var data = [{
   }, {
     'name': 'Elevator',
     'id': 10,
-    'filename': 'noimg.png'
+    'filename': 'p0e10.svg'
   }, ]
 }, {
   'name': '2. sal',
@@ -142,7 +142,7 @@ var data = [{
   }, {
     'name': 'Elevator',
     'id': 10,
-    'filename': 'noimg.png'
+    'filename': 'p0e10.svg'
   }, ]
 }, {
   'name': '3. sal',
@@ -198,7 +198,7 @@ var data = [{
   }, {
     'name': 'Elevator',
     'id': 10,
-    'filename': 'noimg.png'
+    'filename': 'p0e10.svg'
   },
 
   ]
@@ -248,7 +248,7 @@ var data = [{
   }, {
     'name': 'Elevator',
     'id': 10,
-    'filename': 'noimg.png'
+    'filename': 'p0e10.svg'
   }, ]
 }
 
