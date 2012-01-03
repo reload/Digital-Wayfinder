@@ -192,11 +192,13 @@ appReset = {
   'countdown' : 0,
   'initialCountdown' : 15,
   'init' : function(callback){
+    // start countdown and bind handlers
     this.callback = callback;
     this.start();
     this.handlers();
   },
   'start' : function(){
+    // countdown
     setInterval(function(){
       appReset.countdown--;
       if(appReset.countdown == 0) {
