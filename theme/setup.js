@@ -207,6 +207,11 @@ appReset = {
     $('body').click(function(){
       appReset.countdown = appReset.initialCountdown;
     });
+    // the event should trigger on touchstart and touchmove instead
+   /* $('*').ontouchstart = function(evt){
+      alert(evt.pageX + "/" + evt.pageY);
+      // OH NO! These values are blank, this must be a bug
+    }*/
   },
   'reset' : function(){
     this.callback();
