@@ -5,7 +5,7 @@ jQuery(function($){
   isAdminApp = window.location.hash.substring(1) == 'admin';
 
 
-  var activeFloor = 0;
+  //var activeFloor = 0;
   //var activeKeyword = 0;
   var initialFloor = 0;
   //var activeDataId = 0;
@@ -21,7 +21,7 @@ jQuery(function($){
   // get floor from storage
   if(localStorage.getItem("floor")){
     initialFloor = localStorage.getItem("floor");
-    activeFloor = initialFloor;
+    global.activeFloor = initialFloor;
   }
   else{
     initialFloor = 0;
@@ -73,12 +73,12 @@ jQuery(function($){
     e.preventDefault();
     if(global.aggretate == true){
       global.aggretate = false;
-      changeFloorPlan(activeFloor,false);
+      changeFloorPlan(global.activeFloor,false);
       $(this).removeClass('act');
       return;
     }
     global.aggretate = true;
-    changeFloorPlan(activeFloor,false);
+    changeFloorPlan(global.activeFloor,false);
     $(this).addClass('act');
   });
 
@@ -100,6 +100,7 @@ jQuery(function($){
       if(elementid == null) {
         activeDataId = 0;
       }
+      global.activeFloor = index;
       changeOverlay(index,elementid);
       if(!global.aggretate) {
         $('.keywords > li > ul:eq('+index+')').fadeIn('fast');
@@ -133,8 +134,9 @@ jQuery(function($){
         var floor = this;
         floor.id = i;
 
+        ll.d(global.activeFloor);
 
-        if(i != activeFloor){
+        if(i != global.activeFloor){
          $(this.keywords).each(function(){
            if(this.id == clickedId){
              ll.d(itemClicked);
@@ -144,7 +146,7 @@ jQuery(function($){
              $('ul',itemClicked).append('<li>' + floor.name+'</li>');
              $('ul > li:last-child',itemClicked).click(function(){
                changeFloorPlan(floor.id ,false);
-               activeFloor = floor.id;
+               global.activeFloor = floor.id;
              });
 
             }
