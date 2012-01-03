@@ -56,11 +56,12 @@ jQuery(function($){
     if (!isAdminApp) {
       $(this.keywords).each(function(i){
         // Create a list item in the last created Unordered List and bind a clickevent
-        $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'" data-floor-id="'+floorid+'">'+this.name+'</li>');
+        $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'" data-floor-id="'+floorid+'">'+this.name+' ('+floorid+')</li>');
         $('.keywords > li:last-child > ul > li:last-child').click(function(){
           global.activeKeywordId = $(this).attr('data-id');
           if(floorid != global.activeFloor) {
             ll.d('should change floor');
+            ll.d(floorid);
             changeFloor(floorid);
           }
 
@@ -75,8 +76,6 @@ jQuery(function($){
   // aggregate keyword list
   $('.keywords').append('<li class="aggregated"><ul></ul></li>');
   $('.keywords > li > ul > li').clone(true).sort(ll.sort).appendTo($('.keywords > li.aggregated > ul'));
-  ll.d($('.keywords > li > ul > li'));
-
   $('.topbar a').click(function(e){
     e.preventDefault();
     if(global.aggregate == true){
@@ -142,29 +141,23 @@ jQuery(function($){
         var floor = this;
         floor.id = i;
 
-        ll.d(global.activeFloor);
-
         if(i != global.activeFloor){
          $(this.keywords).each(function(){
            if(this.id == clickedId){
-             ll.d(itemClicked);
+
              if($('ul',itemClicked)[0] == undefined){
                $(itemClicked).append('<ul class="floor-list"></ul>');
              }
              $('ul',itemClicked).append('<li>' + floor.name+'</li>');
-             $('ul > li:last-child',itemClicked).click(function(){
-               changeFloorPlan(floor.id ,false);
+             $('ul > li:last-child',itemClicked).click(function(e){
+               e.stopPropagation();
                global.activeFloor = floor.id;
+               changeFloorPlan(floor.id ,false);
              });
-
             }
-
-
          });
         }
       });
-
-
 
     //$('.keywords > li > ul > li').removeAttr('class');
     if(elementIndex == null) {
