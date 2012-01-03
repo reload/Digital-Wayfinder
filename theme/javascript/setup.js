@@ -1,13 +1,4 @@
-d = function(msg,name){
-
-  if(name !== undefined){
-    console.log(name+': '+msg);
-    return;
-  }
-  console.log(msg);
-}
-
-jQuery(function(){
+jQuery(function($){
 
   isiPad = navigator.userAgent.match(/iPad/i) != null;
   webApp = window.navigator.standalone;
