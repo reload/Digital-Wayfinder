@@ -59,6 +59,11 @@ jQuery(function($){
         $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'" data-floor-id="'+floorid+'">'+this.name+'</li>');
         $('.keywords > li:last-child > ul > li:last-child').click(function(){
           global.activeKeywordId = $(this).attr('data-id');
+          if(floorid != global.activeFloor) {
+            ll.d('should change floor');
+            changeFloor(floorid);
+          }
+
           changeOverlay(floorid,i);
           // Set the active state on keywords
           $('.keywords > li > ul > li').removeAttr('class');
@@ -73,13 +78,13 @@ jQuery(function($){
 
   $('.topbar a').click(function(e){
     e.preventDefault();
-    if(global.aggretate == true){
-      global.aggretate = false;
+    if(global.aggregate == true){
+      global.aggregate = false;
       changeFloorPlan(global.activeFloor,false);
       $(this).removeClass('act');
       return;
     }
-    global.aggretate = true;
+    global.aggregate = true;
     changeFloorPlan(global.activeFloor,false);
     $(this).addClass('act');
   });
@@ -104,7 +109,7 @@ jQuery(function($){
       }
       global.activeFloor = index;
       changeOverlay(index,elementid);
-      if(!global.aggretate) {
+      if(!global.aggregate) {
         $('.keywords > li > ul:eq('+index+')').fadeIn('fast');
       }
       else{
@@ -226,6 +231,13 @@ appReset = {
   },
   'reset' : function(){
     this.callback();
+    global.aggregate = false;
     ll.d('app resetting!');
   }
+}
+
+function changeFloor(FloorIndex) {
+  $('.floorplan-image').attr('src', 'files/' + data[FloorIndex].filename);
+  $('.floornav li:eq('+FloorIndex+')').siblings().removeClass('red-gradient');
+  $('.floornav li:eq('+FloorIndex+')').addClass('red-gradient');
 }
