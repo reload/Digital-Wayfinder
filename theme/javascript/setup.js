@@ -71,16 +71,15 @@ jQuery(function($){
 
   $('.topbar a').click(function(e){
     e.preventDefault();
-    if(global.aggretate == false){
-      global.aggretate = true;
+    if(global.aggretate == true){
+      global.aggretate = false;
       changeFloorPlan(activeFloor,false);
-      $(this).addClass('act');
+      $(this).removeClass('act');
       return;
     }
-    global.aggretate = false;
+    global.aggretate = true;
     changeFloorPlan(activeFloor,false);
-    $(this).removeClass('act');
-
+    $(this).addClass('act');
   });
 
   function changeFloorPlan(index,reset){
