@@ -1,3 +1,5 @@
+  var global = {};
+
 jQuery(function($){
 
   isiPad = navigator.userAgent.match(/iPad/i) != null;
@@ -10,7 +12,7 @@ jQuery(function($){
   var initialFloor = 0;
   //var activeDataId = 0;
 
-  var global = {};
+
 
   //var itemClicked = 0;
 
