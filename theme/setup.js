@@ -55,8 +55,12 @@ jQuery(function(){
 
     if (!isAdminApp) {
       $(this.keywords).each(function(i){
-        $('.keywords li:last-child ul:not(.floor-list)').append('<li data-id="'+this.id+'">'+this.name+'</li>');
-        var dataid = this.id;
+        $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'">'+this.name+'</li>');
+        $('.keywords > li:last-child > ul > li:last-child').click(function(){
+          changeOverlay(fi,i);
+          activeDataId = $('.keywords > li > ul:eq('+fi+') > li:eq('+i+')').attr('data-id');
+        });
+        /* var dataid = this.id;
         // this element also exists on other floors
         $(data).each(function(floorId){
           $(this.keywords).each(function(elementId){
@@ -70,23 +74,20 @@ jQuery(function(){
               }
               $('.keywords > li:last-child > ul > li:last-child > ul.floor-list').append('<li>'+data[floorId].name+'</li>');
               $('.keywords > li:last-child > ul > li:last-child > ul.floor-list > li:last-child').click(function(){
+                activeFloor = floorId;
                 changeFloorPlan(floorId,false);
               });
             }
           });
-        });
+        });*/
 
       });
     }
   });
 
-  // change overlay
-  $('.keywords > li > ul > li').click(function(){
+  // change overlay click events
+  /*$('.keywords > li > ul > li').click(function(){
     activeKeyword = $('.keywords > li > ul > li').index(this);
-
-    itemClicked = $(this);
-
-    clickedId = $(this).attr('data-id');
 
     var indexa = 0;
     var found = false;
@@ -106,8 +107,9 @@ jQuery(function(){
         return false;
       }
     });
-  });
+  });*/
 
+  // floorplan click events
   $('.floornav li').click(function(){
     activeFloor = $('.floornav li').index(this);
 
@@ -116,6 +118,11 @@ jQuery(function(){
     if(isAdminApp) {
       localStorage.setItem("floor", activeFloor);
     }
+  });
+  // aggregated list click event
+  $('.topbar a').click(function(e){
+    e.preventDefault();
+
   });
 
   function changeFloorPlan(index,reset){
@@ -152,12 +159,45 @@ jQuery(function(){
 
   function changeOverlay(floorIndex,elementIndex) {
 
+    itemClicked = $('.keywords > li:eq('+floorIndex+') > ul > li:eq('+elementIndex+')');
+
+    clickedId = $(itemClicked).attr('data-id');
+
+
+      $('.keywords li ul li ul').remove();
+      $(data).each(function(i){
+
+        var floor = this;
+        floor.id = i;
+
+        if(i != activeFloor){
+         $(this.keywords).each(function(){
+           if(this.id == clickedId){
+             d(itemClicked);
+             if($('ul',itemClicked)[0] == undefined){
+               $(itemClicked).append('<ul class="floor-list"></ul>');
+             }
+             $('ul',itemClicked).append('<li>' + floor.name+'</li>');
+             $('ul > li:last-child',itemClicked).click(function(){
+               changeFloorPlan(floor.id ,false);
+               activeFloor = floor.id;
+             });
+
+            }
+
+
+         });
+        }
+      });
+
+
+
     $('.keywords > li > ul > li').removeAttr('class');
     if(elementIndex == null) {
-      $('.element-image').hide();
+      $('.element-image').hide('fast');
     }
     else{
-      $('.element-image').show();
+      $('.element-image').show('fast');
       $('.keywords > li > ul:eq('+floorIndex+') > li:eq('+elementIndex+')').addClass('act');
       $('.element-image').attr('src', 'files/' + data[floorIndex].keywords[elementIndex].filename);
     }
