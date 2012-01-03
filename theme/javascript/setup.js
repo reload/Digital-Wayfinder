@@ -6,6 +6,10 @@ jQuery(function($){
   webApp = window.navigator.standalone;
   isAdminApp = window.location.hash.substring(1) == 'admin';
 
+  $('li').live('click',function(){
+    removePoint();
+  });
+
 
   //var activeFloor = 0;
   //var activeKeyword = 0;
@@ -48,9 +52,6 @@ jQuery(function($){
     $('.floornav').append('<li>'+this.name+'</li>');
     $('.floornav > li:last-child').click(function(){
       changeFloorPlan(floorid,false);
-      if(isAdminApp) {
-        localStorage.setItem("floor", floorid);
-      }
     });
     $('.keywords').append('<li><ul></ul></li>');
     if (!isAdminApp) {
@@ -60,8 +61,9 @@ jQuery(function($){
         $('.keywords > li:last-child > ul > li:last-child').click(function(){
           global.activeKeywordId = $(this).attr('data-id');
           if(floorid != global.activeFloor) {
-            ll.d('should change floor');
-            ll.d(floorid);
+            ll.d(global.activeFloor,'curr');
+
+            ll.d(floorid,'target');
             changeFloor(floorid);
           }
 
@@ -181,16 +183,40 @@ jQuery(function($){
 
   changeFloorPlan(initialFloor,true);
   landscapeOrient();
-
+  drawPoint();
 
 
   if(isAdminApp){
     // show a diffrent app icon
     $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
+    $('.floorplan-image').live("touchstart", touchStart);
+    function touchStart(e) {
+      /*e.preventDefault();*/
+      localStorage.setItem("x", e.originalEvent.touches[0].pageX);
+      localStorage.setItem("y", e.originalEvent.touches[0].pageY);
+      localStorage.setItem("floor", global.activeFloor);
+      drawPoint();
+
+
+    }
+
+
   }
   else{
     // when the document is clicked terminate countdown to reset
     appReset.init(function(){changeFloorPlan(initialFloor,true)});
+  }
+  function drawPoint(){
+    if($('div.location')[0] === undefined) {
+      $('body').append('<div class="location"></div>');
+    }
+    $('.location').css({
+      'top' : localStorage.getItem("y")+'px',
+      'left' : localStorage.getItem("x")+'px'
+    });
+  }
+  function removePoint(){
+    $('div.location').fadeOut('slow');
   }
 });
 
@@ -218,14 +244,15 @@ appReset = {
       appReset.countdown = appReset.initialCountdown;
     });
     // the event should trigger on touchstart and touchmove instead
-   /* $('*').ontouchstart = function(evt){
+    $('*').ontouchmove = function(evt){
       alert(evt.pageX + "/" + evt.pageY);
       // OH NO! These values are blank, this must be a bug
-    }*/
+    }
   },
   'reset' : function(){
     this.callback();
     global.aggregate = false;
+    drawPoint();
     ll.d('app resetting!');
   }
 }
@@ -234,4 +261,5 @@ function changeFloor(FloorIndex) {
   $('.floorplan-image').attr('src', 'files/' + data[FloorIndex].filename);
   $('.floornav li:eq('+FloorIndex+')').siblings().removeClass('red-gradient');
   $('.floornav li:eq('+FloorIndex+')').addClass('red-gradient');
+  global.activeFloor = FloorIndex;
 }

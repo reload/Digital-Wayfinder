@@ -45,6 +45,16 @@ font-size:1.2em;
   background-image: -webkit-linear-gradient(top, rgb(192,32,38) 0%, rgb(112,14,17) 100%);
 }
 
+.location {
+  background: red;
+  border-radius:50%;
+  width:2em;
+  height:2em;
+  margin-left:-1em;
+  margin-top:-1em;
+  position:absolute;
+}
+
 .topbar {
   position:relative;
   padding: 1em;
