@@ -206,18 +206,7 @@ jQuery(function($){
     // when the document is clicked terminate countdown to reset
     appReset.init(function(){changeFloorPlan(initialFloor,true)});
   }
-  function drawPoint(){
-    if($('div.location')[0] === undefined) {
-      $('body').append('<div class="location"></div>');
-    }
-    $('.location').css({
-      'top' : localStorage.getItem("y")+'px',
-      'left' : localStorage.getItem("x")+'px'
-    });
-  }
-  function removePoint(){
-    $('div.location').fadeOut('slow');
-  }
+
 });
 
 appReset = {
@@ -258,4 +247,17 @@ function changeFloor(FloorIndex) {
   $('.floornav li:eq('+FloorIndex+')').siblings().removeClass('red-gradient');
   $('.floornav li:eq('+FloorIndex+')').addClass('red-gradient');
   global.activeFloor = FloorIndex;
+}
+
+function drawPoint(){
+  if($('div.location')[0] === undefined) {
+    $('body').append('<div class="location"></div>');
+  }
+  $('.location').css({
+    'top' : localStorage.getItem("y")+'px',
+    'left' : localStorage.getItem("x")+'px'
+  }).fadeIn('slow');
+}
+function removePoint(){
+  $('div.location').fadeOut('slow');
 }
