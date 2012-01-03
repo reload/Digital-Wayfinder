@@ -2,6 +2,7 @@ d = function(msg,name){
 
   if(name !== undefined){
     console.log(name+': '+msg);
+    return;
   }
   console.log(msg);
 }
