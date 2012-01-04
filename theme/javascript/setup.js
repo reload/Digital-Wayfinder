@@ -201,7 +201,6 @@ jQuery(function($){
   changeFloorPlan(initialFloor,true);
   landscapeOrient();
   drawPoint();
-  scrollBack();
 
   $('body').live('touchmove',function(e){
     e.preventDefault();
@@ -302,11 +301,14 @@ function changeFloor(FloorIndex) {
 }
 
 function drawPoint(){
+  if(localStorage.getItem("x") == null) {
+    return;
+  }
   if($('div.location')[0] === undefined) {
     $('body').append('<div class="location"></div>');
   }
   $('.location').css({
-    'top' : localStorage.getItem("y")+'px',
+    'top' : (localStorage.getItem("y")-20)+'px',
     'left' : localStorage.getItem("x")+'px'
   }).fadeIn('slow');
 }
