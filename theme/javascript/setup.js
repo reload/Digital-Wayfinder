@@ -1,4 +1,10 @@
-  var global = {};
+if(window.location.hash.substring(1) == 'clear') {
+  localStorage.clear();
+
+}
+
+
+var global = {};
 
 jQuery(function($){
 
