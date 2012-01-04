@@ -50,7 +50,7 @@ var data = [{
   ]
 }, {
   'name': '1. sal',
-  'filename': 'p1.svg',
+  'filename': 'P1.svg',
   'keywords': [{
     'name': 'Kunsthistorie',
     'id': 11,
@@ -204,7 +204,7 @@ var data = [{
   ]
 },*/ {
   'name': '4. sal',
-  'filename': 'p4.svg',
+  'filename': 'P4.svg',
   'keywords': [{
     'name': 'Webværksted',
     'id': 41,
