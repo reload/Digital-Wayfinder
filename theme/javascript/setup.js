@@ -1,5 +1,7 @@
 if(window.location.hash.substring(1) == 'clear') {
   localStorage.clear();
+  alert('localStorage cleared');
+  ll.d('localStorage cleared');
 
 }
 
