@@ -89,7 +89,7 @@ jQuery(function($){
 
 
 
-  $('.topbar a').click(function(e){
+  $('.topbar .aggregate').click(function(e){
     e.preventDefault();
     if(global.aggregate == true){
       global.aggregate = false;
@@ -205,7 +205,7 @@ jQuery(function($){
     e.stopPropagation();
   });
 
-  // make keywords scroll back when touch scroll is released
+/*  // make keywords scroll back when touch scroll is released
   $('.keywords > li > ul').live('touchstart',function(){
     if($('.keywords > li > ul.activeFloor').scrollTop() == 0){
       $('.keywords > li > ul.activeFloor > li:first-child').css('margin-top','1');
@@ -219,7 +219,7 @@ jQuery(function($){
     $('.keywords > li > ul.activeFloor > li:last-child').css('margin-bottom','0');
 
     //scrollBack();
-  });
+  });*/
 
 
   function scrollBack(){
