@@ -106,15 +106,15 @@ var data = [{
   }, {
     'name': 'Musikbøger',
     'id': 21,
-    'filename': 'P2e2.svg'
+    'filename': 'p2e2.svg'
   }, {
     'name': 'Noder',
     'id': 22,
-    'filename': 'P2e3.svg'
+    'filename': 'p2e3.svg'
   }, {
     'name': 'Lytteposter',
     'id': 23,
-    'filename': 'P2e4.svg'
+    'filename': 'p2e4.svg'
   }, {
     'name': 'CD\'ere',
     'id': 24,
