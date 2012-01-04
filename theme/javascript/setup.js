@@ -61,9 +61,6 @@ jQuery(function($){
         $('.keywords > li:last-child > ul > li:last-child').click(function(){
           global.activeKeywordId = $(this).attr('data-id');
           if(floorid != global.activeFloor) {
-            ll.d(global.activeFloor,'curr');
-
-            ll.d(floorid,'target');
             changeFloor(floorid);
           }
 
@@ -78,6 +75,20 @@ jQuery(function($){
   // aggregate keyword list
   $('.keywords').append('<li class="aggregated"><ul></ul></li>');
   $('.keywords > li > ul > li').clone(true).sort(ll.sort).appendTo($('.keywords > li.aggregated > ul'));
+
+  var prev = null;
+  $('.keywords > li.aggregated > ul > li').each(function(){
+    id = $(this).attr('data-id');
+    if(id == prev){
+      ll.d(id,'same found');
+    }
+
+    prev = id;
+  });
+
+
+
+
   $('.topbar a').click(function(e){
     e.preventDefault();
     if(global.aggregate == true){
