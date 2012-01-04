@@ -103,7 +103,7 @@ jQuery(function($){
   });
 
   function changeFloorPlan(index,reset){
-    $('.keywords > li > ul').fadeOut('fast');
+    $('.keywords > li > ul').fadeOut('fast').removeClass('activeFloor');
     $('.floorplan-image').animate({
       'opacity': 0
     },'fast',function(){
@@ -123,10 +123,10 @@ jQuery(function($){
       global.activeFloor = index;
       changeOverlay(index,elementid);
       if(!global.aggregate) {
-        $('.keywords > li > ul:eq('+index+')').fadeIn('fast');
+        $('.keywords > li > ul:eq('+index+')').fadeIn('fast').addClass('activeFloor');
       }
       else{
-        $('.keywords > li.aggregated > ul').fadeIn('fast');
+        $('.keywords > li.aggregated > ul').fadeIn('fast').addClass('activeFloor');
       }
 
       $('.floorplan-image').attr('src', 'files/' + data[index].filename);
@@ -195,12 +195,47 @@ jQuery(function($){
   changeFloorPlan(initialFloor,true);
   landscapeOrient();
   drawPoint();
+  scrollBack();
+
+  $('body').live('touchmove',function(e){
+    e.preventDefault();
+  });
+
+  $('.location, .keywords > li > ul').live('touchmove',function(e){
+    e.stopPropagation();
+  });
+
+  // make keywords scroll back when touch scroll is released
+  $('.keywords > li > ul').live('touchstart',function(){
+    if($('.keywords > li > ul.activeFloor').scrollTop() == 0){
+      $('.keywords > li > ul.activeFloor > li:first-child').css('margin-top','1');
+      $('.keywords > li > ul.activeFloor > li:last-child').css('margin-bottom','1000px');
+      $('.keywords > li > ul.activeFloor').scrollTop(1);
+    }
+    //scrollBack();
+  });
+  $('.keywords > li > ul').live('touchend',function(){
+    $('.keywords > li > ul.activeFloor > li:first-child').css('margin-top','0px');
+    $('.keywords > li > ul.activeFloor > li:last-child').css('margin-bottom','0');
+
+    //scrollBack();
+  });
+
+
+  function scrollBack(){
+   /*scroll = $('.keywords > li > ul.activeFloor').scrollTop();
+   ll.d(scroll,'dis');
+   if (scroll < 300 || scroll == null) {
+     $('.keywords > li > ul.activeFloor').scrollTop(300);
+   }*/
+//alert('scroll');
+  }
 
 
   if(isAdminApp){
     // show a diffrent app icon
     $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
-    $('.floorplan-image').live("touchstart", touchStart);
+    $('.floorplan-image').live("touchmove", touchStart);
     function touchStart(e) {
       /*e.preventDefault();*/
       localStorage.setItem("x", e.originalEvent.touches[0].pageX);
