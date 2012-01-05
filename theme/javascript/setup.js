@@ -242,7 +242,7 @@ jQuery(function($){
   if(isAdminApp){
     // show a diffrent app icon
     $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
-    $('.floorplan-image').live("touchmove", touchStart);
+    $('.floorplan-image').bind("touchstart touchmove", touchStart);
     function touchStart(e) {
       /*e.preventDefault();*/
       localStorage.setItem("x", e.originalEvent.touches[0].pageX);
@@ -283,7 +283,7 @@ appReset = {
   },
   'handlers' : function(){
     // the event should trigger on touchstart and touchmove instead
-    $('body').live('touchstart touchmove click',function(){
+    $('body').bind('touchstart touchmove click',function(){
       appReset.countdown = appReset.initialCountdown;
     });
   },
