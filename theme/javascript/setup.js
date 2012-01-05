@@ -115,10 +115,8 @@ jQuery(function($){
   });
 
   function changeFloorPlan(index,reset){
-    $('.keywords > li > ul').fadeOut('fast').removeClass('activeFloor');
-    $('.floorplan-image').animate({
-      'opacity': 0
-    },'fast',function(){
+    $('.keywords > li > ul').hide().removeClass('activeFloor');
+
       // if target layer contains same id, select that id
       elementid = null;
       if(!reset) {
@@ -135,17 +133,13 @@ jQuery(function($){
       global.activeFloor = index;
       changeOverlay(index,elementid);
       if(!global.aggregate) {
-        $('.keywords > li > ul:eq('+index+')').fadeIn('fast').addClass('activeFloor');
+        $('.keywords > li > ul:eq('+index+')').show().addClass('activeFloor');
       }
       else{
-        $('.keywords > li.aggregated > ul').fadeIn('fast').addClass('activeFloor');
+        $('.keywords > li.aggregated > ul').show().addClass('activeFloor');
       }
 
       $('.floorplan-image').attr('src', 'files/' + data[index].filename);
-      $('.floorplan-image').animate({
-        'opacity': 1
-      },'fast');
-    });
 
 
 
