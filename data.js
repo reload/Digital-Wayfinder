@@ -144,57 +144,57 @@ var data = [{
     'id': 10,
     'filename': 'p0e10.svg'
   }, ]
-},/* {
+}, {
   'name': '3. sal',
-  'filename': 'p3.gif',
+  'filename': 'P3.svg',
   'keywords': [{
     'name': 'EU',
     'id': 29,
-    'filename': 'noimg.png'
+    'filename': 'P3e1.svg'
   }, {
     'name': 'Kogebøger',
     'id': 30,
-    'filename': 'noimg.png'
+    'filename': 'P3e2.svg'
   }, {
     'name': 'Natur og Teknik',
     'id': 31,
-    'filename': 'noimg.png'
+    'filename': 'P3e3.svg'
   }, {
     'name': 'Sundhed',
     'id': 32,
-    'filename': 'noimg.png'
+    'filename': 'P3e4.svg'
   }, {
     'name': 'Rejser',
     'id': 33,
-    'filename': 'noimg.png'
+    'filename': 'P3e5.svg'
   }, {
     'name': 'Politik og økonomi',
     'id': 34,
-    'filename': 'noimg.png'
+    'filename': 'P3e6.svg'
   }, {
     'name': 'Samfund',
     'id': 35,
-    'filename': 'noimg.png'
+    'filename': 'P3e7.svg'
   }, {
     'name': 'Sociologi',
     'id': 36,
-    'filename': 'noimg.png'
+    'filename': 'P3e8.svg'
   }, {
     'name': 'IT-bøger',
     'id': 37,
-    'filename': 'noimg.png'
+    'filename': 'P3e9.svg'
   }, {
     'name': 'Religion',
     'id': 38,
-    'filename': 'noimg.png'
+    'filename': 'P3e10.svg'
   }, {
     'name': 'Psykologi',
     'id': 39,
-    'filename': 'noimg.png'
+    'filename': 'P3e11.svg'
   }, {
     'name': 'Filosofi',
     'id': 40,
-    'filename': 'noimg.png'
+    'filename': 'P3e12.svg'
   }, {
     'name': 'Elevator',
     'id': 10,
@@ -202,7 +202,7 @@ var data = [{
   },
 
   ]
-},*/ {
+}, {
   'name': '4. sal',
   'filename': 'P4.svg',
   'keywords': [{
