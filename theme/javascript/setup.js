@@ -1,14 +1,18 @@
-if(window.location.hash.substring(1) == 'clear') {
-  localStorage.clear();
-  alert('localStorage cleared');
-  ll.d('localStorage cleared');
-
-}
-
 
 var global = {};
 
 jQuery(function($){
+
+  if(window.location.hash.substring(1) == 'clear') {
+    localStorage.clear();
+    alert('localStorage cleared');
+    $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
+    return;
+
+  }
+  if(window.location.hash.substring(1) == 'admin') {
+    $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
+  }
 
   isiPad = navigator.userAgent.match(/iPad/i) != null;
   webApp = window.navigator.standalone;
