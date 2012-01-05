@@ -182,10 +182,10 @@ jQuery(function($){
 
     //$('.keywords > li > ul > li').removeAttr('class');
     if(elementIndex == null) {
-      $('.element-image').hide('fast');
+      $('.element-image').hide();
     }
     else{
-      $('.element-image').show('fast');
+      $('.element-image').show();
       //$('.keywords > li > ul:eq('+floorIndex+') > li:eq('+elementIndex+')').addClass('act');
       $('.element-image').attr('src', 'files/' + data[floorIndex].keywords[elementIndex].filename);
     }
@@ -312,8 +312,8 @@ function drawPoint(){
   $('.location').css({
     'top' : (localStorage.getItem("y")-20)+'px',
     'left' : localStorage.getItem("x")+'px'
-  }).fadeIn('slow');
+  }).show();
 }
 function removePoint(){
-  $('div.location').fadeOut('slow');
+  $('div.location').hide();
 }
