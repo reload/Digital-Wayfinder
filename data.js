@@ -215,7 +215,7 @@ var data = [{
     'filename': 'P4e2.svg'
   }, {
     'name': 'Tidskrifter',
-    'id': 43,
+    'id': 28,
     'filename': 'P4e3.svg'
   }, {
     'name': 'Sport og Idræt',
