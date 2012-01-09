@@ -12,7 +12,10 @@ ll = {
     }
     console.log(msg);
   },
-  'sort' : function sortAlpha(a,b){
+  'sort' : function(a,b){
+    if (a.innerHTML.toLowerCase() == b.innerHTML.toLowerCase()) {
+     return a.getAttribute('data-floor-id') > b.getAttribute('data-floor-id')  ? 1 : -1;
+    }
     return a.innerHTML.toLowerCase() > b.innerHTML.toLowerCase() ? 1 : -1;
   }
 };
