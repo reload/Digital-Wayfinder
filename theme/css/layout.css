@@ -46,7 +46,7 @@ font-size:1.2em;
 }
 
 .location {
-  background: rgb(192,32,38);;
+  background: rgb(192,32,38);
   border-radius:50%;
   width:2em;
   height:2em;
@@ -54,6 +54,8 @@ font-size:1.2em;
   margin-top:-1em;
   position:absolute;
   -webkit-animation: pulse 1s infinite linear;
+  border:0.2em solid #fff;
+  z-index:5;
 
 }
 
@@ -129,7 +131,7 @@ font-size:1.2em;
         left:0;
         width:100%;
         height:3em;
-        z-index:11;
+        z-index:3;
         text-indent:-999em;
         background-image: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)
 }
@@ -140,7 +142,7 @@ font-size:1.2em;
         left:0;
         width:100%;
         height:3em;
-        z-index:11;
+        z-index:2;
         text-indent:-999em;
              background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)
 }
@@ -166,7 +168,9 @@ position: absolute;
   /*margin-bottom:300px;*/
 }
 .keywords > li > ul > li {
+  margin-left: 1em;
   padding: 0.2em 0;
+/*  position:relative;*/
 }
 .keywords > li > ul > li:before{
   content: ".";
@@ -176,7 +180,14 @@ position: absolute;
   display:inline-block;
   text-indent:-999em;
   border-radius:50%;
-  margin-right:0.3em;
+/*  margin-right:0.3em;*/
+  margin-top:0.2em;
+float:left;
+margin-left:-1em;
+  /*position:relative;*/
+/*  left:-1em;*/
+  /*top:0;*/
+
 }
 .keywords > li > ul > li.act:before{
   background: rgb(192,32,38);

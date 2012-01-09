@@ -19,7 +19,7 @@ jQuery(function($){
   isAdminApp = window.location.hash.substring(1) == 'admin';
 
   $('li').live('click',function(){
-    removePoint();
+    //removePoint();
   });
 
 
@@ -72,9 +72,12 @@ jQuery(function($){
         $('.keywords > li:last-child > ul').append('<li data-id="'+this.id+'" data-floor-id="'+floorid+'">'+this.name+'</li>');
         $('.keywords > li:last-child > ul > li:last-child').click(function(){
           global.activeKeywordId = $(this).attr('data-id');
-          if(floorid != global.activeFloor) {
+      //    if(floorid != global.activeFloor) {
             changeFloor(floorid);
-          }
+		ll.d(global.activeFloor,'floor');
+		$('.keywords > li > ul').hide().removeClass('activeFloor');
+		$('.keywords > li:eq('+global.activeFloor+') > ul').show().addClass('activeFloor');
+      //    }
 
           changeOverlay(floorid,i);
           // Set the active state on keywords
@@ -92,29 +95,60 @@ jQuery(function($){
   $('.keywords > li.aggregated > ul > li').each(function(){
     id = $(this).attr('data-id');
     if(id == prev){
-      ll.d(id,'same found');
+      $(this).remove();
+     // ll.d(id,'same found');
     }
 
     prev = id;
   });
 
 
-
+  function onFloorChange(floorIndex){
+    ll.d('floor changed');
+    $('.topbar .aggregate').removeClass('act');
+    // if floor is not initial floor
+    if (floorIndex != initialFloor) {
+      $('.location').hide();
+    }
+    else {
+      $('.location').show();
+    }
+  }
 
   $('.topbar .aggregate').click(function(e){
     e.preventDefault();
-    if(global.aggregate == true){
-      global.aggregate = false;
+if($(this).hasClass('act')){
+  $(this).removeClass('act');
+  global.aggregate = false;
+   $('.keywords > li.aggregated > ul').hide(); 
+    $('.keywords > li:eq('+global.activeFloor+') > ul').show().addClass('activeFloor');
+}
+else{
+    $(this).addClass('act');
+    global.aggregate = true;
+   $('.keywords > li > ul').hide(); 
+    $('.keywords > li.aggregated > ul').show().addClass('activeFloor');
+
+
+}
+   /* if(global.aggregate == true){
+     // global.aggregate = false;
       changeFloorPlan(global.activeFloor,false);
       $(this).removeClass('act');
       return;
-    }
-    global.aggregate = true;
-    changeFloorPlan(global.activeFloor,false);
-    $(this).addClass('act');
+    }*/
+  //  changeFloorPlan(global.activeFloor,true);
+// if(floorid != global.activeFloor) {
+   //         changeFloor(global.activeFloor);
+  //        }
+
+//          changeOverlay(floorid,i);
+
+    global.aggregate = false;
   });
 
   function changeFloorPlan(index,reset){
+    onFloorChange(index);
     $('.keywords > li > ul').hide().removeClass('activeFloor');
 
       // if target layer contains same id, select that id
@@ -225,6 +259,13 @@ jQuery(function($){
 
     //scrollBack();
   });*/
+function changeFloor(FloorIndex) {
+  onFloorChange(FloorIndex);
+  $('.floorplan-image').attr('src', 'files/' + data[FloorIndex].filename);
+  $('.floornav li:eq('+FloorIndex+')').siblings().removeClass('red-gradient');
+  $('.floornav li:eq('+FloorIndex+')').addClass('red-gradient');
+  global.activeFloor = FloorIndex;
+}
 
 
   function scrollBack(){
@@ -240,6 +281,8 @@ jQuery(function($){
   if(isAdminApp){
     // show a diffrent app icon
     $('link[rel=apple-touch-icon-precomposed]').attr('href','theme/admin_icon.png');
+
+    $('head').append('<link rel="stylesheet" type="text/css" href="theme/admin.css">');
     $('.floorplan-image').bind("touchstart touchmove", touchStart);
     function touchStart(e) {
       /*e.preventDefault();*/
@@ -247,10 +290,33 @@ jQuery(function($){
       localStorage.setItem("y", e.originalEvent.touches[0].pageY);
       localStorage.setItem("floor", global.activeFloor);
       drawPoint();
-
-
     }
 
+    $('body').append('<form action="" method="post" class="settings"><label><p>Devicename:</p><input placeholder="give the device a name" type="text" name="devicename" /></label><input type="submit"value="set"></form>');
+    $('input[name=devicename]').val(localStorage.getItem('devicename'));
+    $('form').submit(function(e){
+     // e.preventDefault();
+//ll.d($('input[name=devicename]',this).val());
+      localStorage.setItem('devicename',$('input[name=devicename]',this).val());
+      
+//      ll.d($('button:clicked'));
+
+ //     ll.d(e);
+      return false;
+    //ll.d('submit');  
+    });
+    $('.settings').append('<div><label><p>Rotate map:</p><button class="rotate">Rotate</button></label></div>');
+    $('.rotate').click(function(e){
+      e.preventDefault();
+	ll.d(localStorage.getItem('rotated'));
+      if(localStorage.getItem('rotated') == '0'){
+        localStorage.setItem('rotated','180');
+      }
+      else{
+        localStorage.setItem('rotated','0');    
+      }
+      rotateMap();
+    });
 
   }
   else{
@@ -293,12 +359,6 @@ appReset = {
   }
 }
 
-function changeFloor(FloorIndex) {
-  $('.floorplan-image').attr('src', 'files/' + data[FloorIndex].filename);
-  $('.floornav li:eq('+FloorIndex+')').siblings().removeClass('red-gradient');
-  $('.floornav li:eq('+FloorIndex+')').addClass('red-gradient');
-  global.activeFloor = FloorIndex;
-}
 
 function drawPoint(){
   if(localStorage.getItem("x") == null) {
@@ -315,3 +375,33 @@ function drawPoint(){
 function removePoint(){
   $('div.location').hide();
 }
+
+
+var rotateMap = function(){
+  ll.d(localStorage.getItem('rotated'));
+  if(localStorage.getItem('rotated') == '180') {
+    $('body').addClass('rotated');
+  }
+  else {
+    $('body').removeClass('rotated');
+  }
+}
+
+var dwf = {
+	'init' : function(){
+		rotateMap();
+},
+	'buildKeywords' : function(){},
+
+};
+
+
+// bootstap in jQuery scope?
+jQuery(function(){
+  dwf.init();
+});
+
+
+
+
+
